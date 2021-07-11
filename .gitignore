@@ -1,0 +1,29 @@
+# MAC dependent file
+.DS_Store
+
+# Fortran module files
+*.mod
+
+# Compiled object files
+*.o
+*.obj
+
+# Compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled static libraries
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.app
+
+# Log files
+*.log
+
+# CMake dir
+build
