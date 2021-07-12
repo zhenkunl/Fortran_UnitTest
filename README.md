@@ -15,7 +15,7 @@ An [example program](https://github.com/zhenkunl/Fortran_UnitTest/blob/main/test
 ```
 
 ## Output format
-The output format is very like that of [fortran-unit-test](https://github.com/dongli/fortran-unit-test). The only difference is that the result of each single assertion is outputed immediately once it is completed, thus the summary of all assertion in one case is given at the end of the case. An example of output is as follows.
+The output format is very like that of [fortran-unit-test](https://github.com/dongli/fortran-unit-test). The only difference is that the result of each single assertion is outputed immediately once it is completed, thus the summary of all assertions in one case is given at the end of the case. An example of output is as follows.
 ```text
 /////////////////////////// Report of Suite: suite1 /////////////////////////////
 
