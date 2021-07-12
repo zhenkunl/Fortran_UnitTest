@@ -26,17 +26,17 @@ The output format is very like that of [fortran-unit-test](https://github.com/do
  |   |   +-> Assertion #1 succeed!
  |   |   |
  |   |   +-> Assertion #2 failed with reason: x (True) false y (N/A)
- |   |   +-> Check line: /data_1/fortran-repos/Fortran_UnitTest/test/test_unittest.F90:10
+ |   |   +-> Check line: test_unittest.F90:10
  |   |   |
  |   +-> case1: 1 of 2 assertions succeed.
  |   |
  |   +-> case case2:
  |   |   |
  |   |   +-> Assertion #1 failed with reason: x (True) false y (N/A)
- |   |   +-> Check line: /data_1/fortran-repos/Fortran_UnitTest/test/test_unittest.F90:13
+ |   |   +-> Check line: test_unittest.F90:13
  |   |   |
  |   |   +-> Assertion #2 failed with reason: x (False) true y (N/A)
- |   |   +-> Check line: /data_1/fortran-repos/Fortran_UnitTest/test/test_unittest.F90:14
+ |   |   +-> Check line: test_unittest.F90:14
  |   |   |
  |   +-> case2: 0 of 2 assertions succeed.
  |   |
