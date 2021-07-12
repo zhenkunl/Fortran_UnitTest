@@ -1,4 +1,6 @@
 # Fortran Unit Test Library
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/github.com/zhenkunl/Fortran_UnitTest)
+
 Unit test is a way of testing a program unit which can be isolated from the entire sofeware program. Most program languages (like C++, Python) have had their own unit test framework already, though Fortran doesn't have such a library widely used by the community. This repository is an attempt to implement a pure Fortran library using Object-Oriented Programming (OOP). It is strongly inspired by [Zofu](https://github.com/acroucher/zofu), and its output format is derived from [fortran-unit-test](https://github.com/dongli/fortran-unit-test). However, it is totally a different library for its easy use which will be shown later. In this repository, all the operations are encapsulated in a Fortran class `unittest_t`, so it is very easily distinguished from functions or subroutines of the library to be tested.
 
 ## Basic usage
