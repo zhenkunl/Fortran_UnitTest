@@ -12,6 +12,10 @@ An [example program](https://github.com/zhenkunl/Fortran_UnitTest/blob/main/test
   call test%start_case()
   call test%assert_true(2>1, __FILE__, __LINE__)
   call test%assert_false(1<2, __FILE__, __LINE__)
+  call test%assert_equal(1, 1, __FILE__, __LINE__)
+  call test%assert_equal(1.1, 1.1, __FILE__, __LINE__)
+  call test%assert_equal('abc', 'abcd', __FILE__, __LINE__)
+  call test%assert_equal(.true., .true., __FILE__, __LINE__)
   call test%end_case()
   call test%summary()
 ```
@@ -30,21 +34,41 @@ The output format is very like that of [fortran-unit-test](https://github.com/do
  |   |   +-> Assertion #2 failed with reason: x (True) false y (N/A)
  |   |   +-> Check line: test_unittest.F90:10
  |   |   |
- |   +-> case1: 1 of 2 assertions succeed.
+ |   |   +-> Assertion #3 succeed!
+ |   |   |
+ |   |   +-> Assertion #4 failed with reason: x (1) = y (2)
+ |   |   +-> Check line: test_unittest.F90:12
+ |   |   |
+ |   |   +-> Assertion #5 succeed!
+ |   |   |
+ |   |   +-> Assertion #6 failed with reason: x (1.100000) = y (1.200000)
+ |   |   +-> Check line: test_unittest.F90:14
+ |   |   |
+ |   |   +-> Assertion #7 succeed!
+ |   |   |
+ |   |   +-> Assertion #8 failed with reason: x (abc) = y (abcd)
+ |   |   +-> Check line: test_unittest.F90:16
+ |   |   |
+ |   |   +-> Assertion #9 succeed!
+ |   |   |
+ |   |   +-> Assertion #10 failed with reason: x (True) = y (False)
+ |   |   +-> Check line: test_unittest.F90:18
+ |   |   |
+ |   +-> case1: 5 of 10 assertions succeed.
  |   |
  |   +-> case case2:
  |   |   |
  |   |   +-> Assertion #1 failed with reason: x (True) false y (N/A)
- |   |   +-> Check line: test_unittest.F90:13
+ |   |   +-> Check line: test_unittest.F90:21
  |   |   |
  |   |   +-> Assertion #2 failed with reason: x (False) true y (N/A)
- |   |   +-> Check line: test_unittest.F90:14
+ |   |   +-> Check line: test_unittest.F90:22
  |   |   |
  |   +-> case2: 0 of 2 assertions succeed.
  |   |
  |
  +-> Summary:
- |   +-> suite1:  1 of 4 assertions succeed.
+ |   +-> suite1:  5 of 12 assertions succeed.
  |   +-> suite1:  0 of 2 cases succeed.
 
 ////////////////////////////////////////////////////////////////////////////////
