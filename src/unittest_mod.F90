@@ -26,12 +26,13 @@ module unittest
     procedure, public, pass(self)  :: assert_true
     procedure, public, pass(self)  :: assert_false
 
-    ! generic, public                :: assert_equal => assert_equal_integer, assert_equal_real, &
-    !                                   assert_equal_logical, assert_equal_string
-    ! procedure, private, pass(self) :: assert_equal_integer
-    ! procedure, private, pass(self) :: assert_equal_real
-    ! procedure, private, pass(self) :: assert_equal_logical
-    ! procedure, private, pass(self) :: assert_equal_string
+    generic, public                :: assert_equal => assert_equal_integer, assert_equal_real, &
+                                      assert_equal_logical, assert_equal_string, assert_equal_character
+    procedure, private, pass(self) :: assert_equal_integer
+    procedure, private, pass(self) :: assert_equal_real
+    procedure, private, pass(self) :: assert_equal_logical
+    procedure, private, pass(self) :: assert_equal_string
+    procedure, private, pass(self) :: assert_equal_character
 
     procedure, private, pass(self) :: header
     procedure, private, pass(self) :: footer
@@ -143,6 +144,106 @@ contains
     write(*, *) assert_result_
 
   end subroutine assert_false
+
+  subroutine assert_equal_integer(self, expected, actual, file_name, line_number)
+
+    implicit none
+    class(unittest_t), intent(inout)       :: self
+    integer, intent(in)                    :: expected
+    integer, intent(in)                    :: actual
+    character(len=*), intent(in), optional :: file_name
+    integer, intent(in), optional          :: line_number
+    type(assert_result_t)                  :: assert_result_
+    logical                                :: condition
+    integer                                :: id
+
+    condition = expected == actual
+    call self%assert(condition)
+    id = self%case_assertions%total_num()
+    assert_result_ = assert_result_t(id, string_t(expected), string_t('='), string_t(actual), condition, file_name, line_number)
+    write(*, *) assert_result_
+
+  end subroutine assert_equal_integer
+
+  subroutine assert_equal_real(self, expected, actual, file_name, line_number)
+
+    implicit none
+    class(unittest_t), intent(inout)       :: self
+    real, intent(in)                       :: expected
+    real, intent(in)                       :: actual
+    character(len=*), intent(in), optional :: file_name
+    integer, intent(in), optional          :: line_number
+    type(assert_result_t)                  :: assert_result_
+    logical                                :: condition
+    integer                                :: id
+
+    condition = expected == actual
+    call self%assert(condition)
+    id = self%case_assertions%total_num()
+    assert_result_ = assert_result_t(id, string_t(expected), string_t('='), string_t(actual), condition, file_name, line_number)
+    write(*, *) assert_result_
+
+  end subroutine assert_equal_real
+
+  subroutine assert_equal_logical(self, expected, actual, file_name, line_number)
+
+    implicit none
+    class(unittest_t), intent(inout)       :: self
+    logical, intent(in)                    :: expected
+    logical, intent(in)                    :: actual
+    character(len=*), intent(in), optional :: file_name
+    integer, intent(in), optional          :: line_number
+    type(assert_result_t)                  :: assert_result_
+    logical                                :: condition
+    integer                                :: id
+
+    condition = expected .eqv. actual
+    call self%assert(condition)
+    id = self%case_assertions%total_num()
+    assert_result_ = assert_result_t(id, string_t(expected), string_t('='), string_t(actual), condition, file_name, line_number)
+    write(*, *) assert_result_
+
+  end subroutine assert_equal_logical
+
+  subroutine assert_equal_string(self, expected, actual, file_name, line_number)
+
+    implicit none
+    class(unittest_t), intent(inout)       :: self
+    type(string_t), intent(in)             :: expected
+    type(string_t), intent(in)             :: actual
+    character(len=*), intent(in), optional :: file_name
+    integer, intent(in), optional          :: line_number
+    type(assert_result_t)                  :: assert_result_
+    logical                                :: condition
+    integer                                :: id
+
+    condition = expected == actual
+    call self%assert(condition)
+    id = self%case_assertions%total_num()
+    assert_result_ = assert_result_t(id, expected, string_t('='), actual, condition, file_name, line_number)
+    write(*, *) assert_result_
+
+  end subroutine assert_equal_string
+
+  subroutine assert_equal_character(self, expected, actual, file_name, line_number)
+
+    implicit none
+    class(unittest_t), intent(inout)       :: self
+    character(len=*), intent(in)           :: expected
+    character(len=*), intent(in)           :: actual
+    character(len=*), intent(in), optional :: file_name
+    integer, intent(in), optional          :: line_number
+    type(assert_result_t)                  :: assert_result_
+    logical                                :: condition
+    integer                                :: id
+
+    condition = expected == actual
+    call self%assert(condition)
+    id = self%case_assertions%total_num()
+    assert_result_ = assert_result_t(id, string_t(expected), string_t('='), string_t(actual), condition, file_name, line_number)
+    write(*, *) assert_result_
+
+  end subroutine assert_equal_character
 
   subroutine header(self)
 
