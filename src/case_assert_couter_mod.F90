@@ -1,5 +1,5 @@
 module case_assert_counter
-  use string_type, only : string_t
+  use string, only : string_t
   use counter_type, only : counter_t
 
   implicit none

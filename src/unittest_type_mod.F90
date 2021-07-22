@@ -1,5 +1,5 @@
-module unittest
-  use string_type, only : string_t
+module unittest_type
+  use string, only : string_t
   use assert_result, only : assert_result_t
   use assert_counter, only : assert_counter_t
   use case_counter, only : case_counter_t
@@ -309,4 +309,4 @@ contains
 
   end subroutine assert
 
-end module unittest
+end module unittest_type

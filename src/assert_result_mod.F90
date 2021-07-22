@@ -1,5 +1,5 @@
 module assert_result
-  use string_type, only : string_t
+  use string, only : string_t
 
   implicit none
   private

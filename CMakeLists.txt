@@ -1,30 +1,70 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Fortran_Unittest LANGUAGES Fortran)
+project("Fortran_Unittest" LANGUAGES "Fortran" VERSION "0.0.1")
 
-if (CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
+option(INSTALL_PROJECT "Whether this project should be installed" TRUE)
+option(RUN_TEST "Whether the test executable should be compiled" OFF)
+
+# Follow GNU conventions for installing directories
+include(GNUInstallDirs)
+
+# Add flag for different compilers
+if(CMAKE_Fortran_COMPILER_ID MATCHES GNU)
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -ffree-line-length-none")
-  if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -Wall -Wextra -Warray-temporaries -Wconversion -fimplicit-none -fbacktrace -fcheck=all -ffpe-trap=zero,overflow,underflow -finit-real=nan")
-  else ()
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -ffpe-summary=none -Ofast")
-  endif ()
-endif ()
+  if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -gdwarf -Og -fbacktrace -fcheck=all")
+    #-g -O0 -cpp -ffree-form  -ffloat-store -fno-sign-zero -std=f2008
+  else()
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O2")
+    #-O3 -cpp -ffree-form  -ffloat-store -fno-sign-zero -std=f2008
+  endif()
+elseif(CMAKE_Fortran_COMPILER_ID MATCHES PGI)
+  if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -O0 -traceback -fPIC")
+  else()
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fPIC")
+  endif()
+elseif(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
+  if(CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -O0 -traceback -check all")
+    #-g -O0 -debug  -CB -CA -CU -std08 -fpp -fp-model source
+  else()
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O2")
+    #-O3 -std08 -unroll -fpp -fp-model source -diag-disable 8291,8577
+  endif()
+endif()
 
-set (CMAKE_Fortran_MODULE_DIRECTORY "${CMAKE_BINARY_DIR}")
-include_directories(${CMAKE_BINARY_DIR})
+# Add third-party library
+set(FORTRAN_STRING_DIR ${CMAKE_SOURCE_DIR}/lib/Fortran_String)
 
-set(sources
-  src/assert_couter_mod.F90
-  src/assert_result_mod.F90
-  src/case_assert_couter_mod.F90
-  src/case_couter_mod.F90
-  src/couter_type_mod.F90
-  src/unittest_mod.F90
-  lib/shr_kind_mod.F90
-  lib/string_type_mod.F90
-  test/test_unittest.F90
-)
+# Collect source of the project
+add_subdirectory("src")
 
-add_library(unittest SHARED ${sources})
-add_executable(test_unittest.exe ${sources})
+if(INSTALL_PROJECT)
+  # Export targets for other projects
+  add_library("${PROJECT_NAME}" INTERFACE)
+  target_link_libraries("${PROJECT_NAME}" INTERFACE "${PROJECT_NAME}-lib")
+  install(
+    TARGETS
+    "${PROJECT_NAME}"
+    EXPORT
+    "${PROJECT_NAME}-targets"
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+  )
+
+  # Install exported targets
+  install(
+    EXPORT "${PROJECT_NAME}-targets"
+    NAMESPACE
+    "${PROJECT_NAME}::"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+  )
+
+endif()
+
+if(RUN_TEST)
+  add_executable(test_unittest.exe)
+  target_sources(test_unittest.exe PRIVATE "test/test_unittest.F90")
+  target_link_libraries(test_unittest.exe PRIVATE ${PROJECT_NAME})
+endif()
