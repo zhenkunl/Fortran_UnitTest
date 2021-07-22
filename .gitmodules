@@ -1,0 +1,3 @@
+[submodule "lib/Fortran_String"]
+	path = lib/Fortran_String
+	url = git@github.com:zhenkunl/Fortran_String.git
