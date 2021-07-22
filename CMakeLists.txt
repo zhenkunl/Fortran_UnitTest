@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project("Fortran_Unittest" LANGUAGES "Fortran" VERSION "0.0.1")
+project("fortran_unittest" LANGUAGES "Fortran" VERSION "0.0.1")
 
 option(INSTALL_PROJECT "Whether this project should be installed" TRUE)
 option(RUN_TEST "Whether the test executable should be compiled" OFF)
