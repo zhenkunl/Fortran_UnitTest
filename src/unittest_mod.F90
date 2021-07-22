@@ -26,8 +26,8 @@ module unittest
     procedure, public, pass(self)  :: assert_true
     procedure, public, pass(self)  :: assert_false
 
-    generic, public                :: assert_equal => assert_equal_integer, assert_equal_real, &
-                                      assert_equal_logical, assert_equal_string, assert_equal_character
+    generic, public                :: assert_equal => assert_equal_integer, assert_equal_real, assert_equal_logical, &
+                                      assert_equal_string, assert_equal_character
     procedure, private, pass(self) :: assert_equal_integer
     procedure, private, pass(self) :: assert_equal_real
     procedure, private, pass(self) :: assert_equal_logical

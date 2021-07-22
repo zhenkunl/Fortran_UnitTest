@@ -28,8 +28,7 @@ module assert_result
 
 contains
 
-  function constructor(id, left_operand, operator, right_operand, passed, file_name, line_number) &
-                      result(assert_result)
+  function constructor(id, left_operand, operator, right_operand, passed, file_name, line_number) result(assert_result)
 
     implicit none
     integer, intent(in)                    :: id
