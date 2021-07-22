@@ -35,7 +35,7 @@ elseif(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
 endif()
 
 # Add third-party library
-set(FORTRAN_STRING_DIR ${CMAKE_SOURCE_DIR}/lib/Fortran_String)
+add_subdirectory("lib/Fortran_String")
 
 # Collect source of the project
 add_subdirectory("src")

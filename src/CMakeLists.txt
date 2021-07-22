@@ -9,8 +9,6 @@ set(
   "${dir}/couter_type_mod.F90"
   "${dir}/unittest_type_mod.F90"
   "${dir}/unittest.F90"
-  "${FORTRAN_STRING_DIR}/src/string_type.F90"
-  "${FORTRAN_STRING_DIR}/src/string.F90"
 )
 
 set(
@@ -36,7 +34,7 @@ set_target_properties(
 target_link_libraries(
   "${PROJECT_NAME}-lib"
   PRIVATE
-  "${lib-deps}"
+  fortran_string
 )
 target_include_directories(
   "${PROJECT_NAME}-lib"
