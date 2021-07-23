@@ -63,21 +63,21 @@ if(INSTALL_PROJECT)
 
   include(CMakePackageConfigHelpers)
 # generate the config file that is includes the exports
-  configure_file(Config.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+  configure_file(cmake/${PROJECT_NAME}-config.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
   )
 
 # generate the version file for the config file
   write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-configversion.cmake"
     VERSION ${VERSION}
     COMPATIBILITY AnyNewerVersion
   )
 
 # install the configuration file
   install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-configversion.cmake"
     DESTINATION lib/cmake/${PROJECT_NAME}
     )
 
