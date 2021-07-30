@@ -18,7 +18,7 @@ set(
 
 # Create example library target
 add_library(
-  "${PROJECT_NAME}-lib" SHARED
+  "${PROJECT_NAME}-lib"
   "${srcs}"
 )
 

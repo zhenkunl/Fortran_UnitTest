@@ -1,38 +1,15 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.12)
 
 project("fortran_unittest" LANGUAGES "Fortran" VERSION "0.0.1")
 
 option(INSTALL_PROJECT "Whether this project should be installed" TRUE)
+option(BUILD_SHARED_LIBS "Whether shared libraries should be built" TRUE)
 option(BUILD_TESTING "Whether the test executable should be compiled" FALSE)
 
 # Follow GNU conventions for installing directories
 include(GNUInstallDirs)
 
-# Add flag for different compilers
-if(CMAKE_Fortran_COMPILER_ID MATCHES GNU)
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -ffree-line-length-none")
-  if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -gdwarf -Og -fbacktrace -fcheck=all")
-    #-g -O0 -cpp -ffree-form  -ffloat-store -fno-sign-zero -std=f2008
-  else()
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O2")
-    #-O3 -cpp -ffree-form  -ffloat-store -fno-sign-zero -std=f2008
-  endif()
-elseif(CMAKE_Fortran_COMPILER_ID MATCHES PGI)
-  if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -O0 -traceback -fPIC")
-  else()
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -fPIC")
-  endif()
-elseif(CMAKE_Fortran_COMPILER_ID MATCHES Intel)
-  if(CMAKE_BUILD_TYPE MATCHES Debug)
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -g -O0 -traceback -check all")
-    #-g -O0 -debug  -CB -CA -CU -std08 -fpp -fp-model source
-  else()
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O2")
-    #-O3 -std08 -unroll -fpp -fp-model source -diag-disable 8291,8577
-  endif()
-endif()
+include(cmake/compilers.cmake)
 
 # Add third-party library
 add_subdirectory("lib/Fortran_String")
@@ -53,38 +30,7 @@ if(INSTALL_PROJECT)
     ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
   )
 
-  # Install exported targets
-  install(
-    EXPORT "${PROJECT_NAME}-targets"
-    NAMESPACE
-    "${PROJECT_NAME}::"
-    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
-  )
-
-  include(CMakePackageConfigHelpers)
-# generate the config file that is includes the exports
-  configure_package_config_file(cmake/${PROJECT_NAME}-config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake
-    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
-    PATH_VARS
-    CMAKE_INSTALL_PREFIX
-    CMAKE_INSTALL_INCLUDEDIR
-    CMAKE_INSTALL_LIBDIR
-  )
-
-# generate the version file for the config file
-  write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
-    VERSION ${PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
-  )
-
-# install the configuration file
-  install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}-config-version.cmake"
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
-  )
-
+  include(cmake/install.cmake)
 endif()
 
 if(BUILD_TESTING)
