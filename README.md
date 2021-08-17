@@ -1,15 +1,19 @@
+<a name="top"></a>
+
 # Fortran Unit Test Library
 [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/github.com/zhenkunl/Fortran_UnitTest)
 
-Unit test is a way of testing a program unit which can be isolated from the entire sofeware program. Most programming languages (like C++, Python) have had their own unit test framework already, though Fortran doesn't have such a library widely used by the community. Fortran_UnitTest is an attempt to implement a pure Fortran library using Object-Oriented Programming (OOP). It is strongly inspired by [Zofu](https://github.com/acroucher/zofu), and its output format is derived from [fortran-unit-test](https://github.com/dongli/fortran-unit-test). It, however, is totally a different library for its easy use which will be shown later. In this repository, all the operations are encapsulated in a Fortran class `unittest_t`, so it is very easily distinguished from functions or subroutines of the library to be tested. Hopefully Fortran_UnitTest will be able to provide a good alternative for unit test in Fortran.
+Unit test is a way of testing a program unit which can be isolated from the entire sofeware program. Most programming languages (like C++, Python) have had their own unit test framework already, though Fortran doesn't have such a library widely used by the community. `Fortran_UnitTest` is an attempt to implement a pure Fortran library using Object-Oriented Programming (OOP). It is strongly inspired by [Zofu](https://github.com/acroucher/zofu), and its output format is derived from [fortran-unit-test](https://github.com/dongli/fortran-unit-test). It, however, is totally a different library for its easy use which will be shown later. In this repository, all the operations are encapsulated in a Fortran class `unittest_t`, so it is very easily distinguished from functions or subroutines of the library to be tested. 
+
+Hopefully Fortran_UnitTest will be able to provide a good alternative for unit test in Fortran.
 
 ## Getting started
 
 ### Get the code
 ```sh
 git clone https://github.com/zhenkunl/Fortran_UnitTest
-git submodule init && git submodule update
 cd Fortran_UnitTest
+git submodule init && git submodule update
 ```
 
 ### Requirements
@@ -17,7 +21,7 @@ To build the Fortran_UnitTest library you need
 * Fortran 2008-compatible compiler
 * CMake version 3.12 or newer
 
-The build system has been tested on Mac and Linux using the Intel Fortran Compiler and gfortran 7.5.0.
+The build system has been tested on Mac and Linux using the Intel Fortran Compiler 2021.2.0 and gfortran 7.5.0.
 
 ### Build with CMake
 Configure the build with
@@ -46,6 +50,8 @@ If everything goes well, to install the project to the declared prefix run
 cmake --install build
 ```
 
+Go to [Top](#top)
+
 ## Usage
 To make use this library use the `unittest` module in your projects. Include a `use unittest` statement then a derived Fortran type `unittest_t` is available. A unit test object may then be declared. An example usage is shown below:
 ```Fortran
@@ -63,6 +69,9 @@ To make use this library use the `unittest` module in your projects. Include a `
   call test%summary()
 ```
 Also an complete [example program](https://github.com/zhenkunl/Fortran_UnitTest/blob/main/test/test_unittest.F90) is contained under the `test` subdirectory.
+
+Go to [Top](#top)
+
 ## Output from Fortran_UnitTest
 The output form is very like that of [fortran-unit-test](https://github.com/dongli/fortran-unit-test). The only difference is that the result of each single assertion is outputed immediately once it is completed in this repo, thus the summary of all assertions in one case is given at the end of the case. An example of output would look like this:
 ```text
@@ -116,11 +125,12 @@ The output form is very like that of [fortran-unit-test](https://github.com/dong
 
 ////////////////////////////////////////////////////////////////////////////////
 ```
+Go to [Top](#top)
 
 ## Using Fortran_UnitTest in your project
-The `Fortran_UnitTest` project exports CMake package files to make it usable for other projects. The package files are located in the library directory in the installation prefix.
+The Fortran_UnitTest project exports CMake package files to make it usable for other projects. The package files are located in the library directory in the installation prefix.
 
-To build your own project which requires `Fortran_UnitTest` library, 
+To build your own project which requires Fortran_UnitTest library, 
 you can find a local installation in your `CMakeLists.txt` with
 ```cmake
 find_package(fortran_unittest REQUIRED)
@@ -131,7 +141,7 @@ target_link_libraries(
   fortran_unittest::fortran_unittest
 )
 ```
-To make the installed library discoverable add the `Fortran_UnitTest` directory to the `CMAKE_PREFIX_PATH`. For Bash:
+To make the installed library discoverable add the Fortran_UnitTest directory to the `CMAKE_PREFIX_PATH`. For Bash:
 ```sh
 export CMAKE_PREFIX_PATH=your/library/path:$CMAKE_PREFIX_PATH
 ```
@@ -145,3 +155,4 @@ You could, alternatively, specify the install location when configure your proje
 ```sh
 fortran_unittest_DIR=your/library/path cmake -B build [other options]
 ```
+Go to [Top](#top)
