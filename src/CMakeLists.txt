@@ -2,11 +2,11 @@ set(dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
 set(
   srcs
-  "${dir}/assert_couter_mod.F90"
+  "${dir}/assert_counter_mod.F90"
   "${dir}/assert_result_mod.F90"
-  "${dir}/case_assert_couter_mod.F90"
-  "${dir}/case_couter_mod.F90"
-  "${dir}/couter_type_mod.F90"
+  "${dir}/case_assert_counter_mod.F90"
+  "${dir}/case_counter_mod.F90"
+  "${dir}/counter_type_mod.F90"
   "${dir}/unittest_type_mod.F90"
   "${dir}/unittest.F90"
 )

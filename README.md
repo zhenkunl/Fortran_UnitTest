@@ -1,7 +1,6 @@
 <a name="top"></a>
 
 # Fortran Unit Test Library
-[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/github.com/zhenkunl/Fortran_UnitTest)
 
 Unit test is a way of testing a program unit which can be isolated from the entire sofeware program. Most programming languages (like C++, Python) have had their own unit test framework already, though Fortran doesn't have such a library widely used by the community. `Fortran_UnitTest` is an attempt to implement a pure Fortran library using Object-Oriented Programming (OOP). It is strongly inspired by [Zofu](https://github.com/acroucher/zofu), and its output format is derived from [fortran-unit-test](https://github.com/dongli/fortran-unit-test). It, however, is totally a different library for its easy use which will be shown later. In this repository, all the operations are encapsulated in a Fortran class `unittest_t`, so it is very easily distinguished from functions or subroutines of the library to be tested. 
 
@@ -21,7 +20,7 @@ To build the Fortran_UnitTest library you need
 * Fortran 2008-compatible compiler
 * CMake version 3.12 or newer
 
-The build system has been tested on Mac and Linux using the Intel Fortran Compiler 2021.2.0 and gfortran 7.5.0.
+The build system has been tested on MacOS and Linux using the Intel Fortran Compiler 2021.2.0 and gfortran 7.5.0.
 
 ### Build with CMake
 Configure the build with
@@ -45,7 +44,7 @@ To test your build, run the test executable under the `build` directory once the
 ```sh
 ./build/test_unittest.exe
 ```
-If everything goes well, to install the project to the declared prefix run
+To install the project to the declared prefix run
 ```sh
 cmake --install build
 ```
@@ -83,37 +82,37 @@ The output form is very like that of [fortran-unit-test](https://github.com/dong
  |   |   |
  |   |   +-> Assertion #1 succeed!
  |   |   |
- |   |   +-> Assertion #2 failed with reason: x (True) false y (N/A)
+ |   |   +-> Assertion #2 failed with reason: expected (True) is false
  |   |   +-> Check line: test_unittest.F90:10
  |   |   |
  |   |   +-> Assertion #3 succeed!
  |   |   |
- |   |   +-> Assertion #4 failed with reason: x (1) = y (2)
+ |   |   +-> Assertion #4 failed with reason: expected (1) = actual (2)
  |   |   +-> Check line: test_unittest.F90:12
  |   |   |
  |   |   +-> Assertion #5 succeed!
  |   |   |
- |   |   +-> Assertion #6 failed with reason: x (1.100000) = y (1.200000)
+ |   |   +-> Assertion #6 failed with reason: expected (1.100000) = actual (1.200000)
  |   |   +-> Check line: test_unittest.F90:14
  |   |   |
  |   |   +-> Assertion #7 succeed!
  |   |   |
- |   |   +-> Assertion #8 failed with reason: x (abc) = y (abcd)
+ |   |   +-> Assertion #8 failed with reason: expected (abc) = actual (abcd)
  |   |   +-> Check line: test_unittest.F90:16
  |   |   |
  |   |   +-> Assertion #9 succeed!
  |   |   |
- |   |   +-> Assertion #10 failed with reason: x (True) = y (False)
+ |   |   +-> Assertion #10 failed with reason: expected (True) = actual (False)
  |   |   +-> Check line: test_unittest.F90:18
  |   |   |
  |   +-> case1: 5 of 10 assertions succeed.
  |   |
  |   +-> case case2:
  |   |   |
- |   |   +-> Assertion #1 failed with reason: x (True) false y (N/A)
+ |   |   +-> Assertion #1 failed with reason: expected (True) is false
  |   |   +-> Check line: test_unittest.F90:21
  |   |   |
- |   |   +-> Assertion #2 failed with reason: x (False) true y (N/A)
+ |   |   +-> Assertion #2 failed with reason: expected (False) is true
  |   |   +-> Check line: test_unittest.F90:22
  |   |   |
  |   +-> case2: 0 of 2 assertions succeed.
@@ -141,7 +140,7 @@ target_link_libraries(
   fortran_unittest::fortran_unittest
 )
 ```
-To make the installed library discoverable add the Fortran_UnitTest directory to the `CMAKE_PREFIX_PATH`. For Bash:
+To make the installed library discoverable add the Fortran_UnitTest directory to the `CMAKE_PREFIX_PATH`. For bash:
 ```sh
 export CMAKE_PREFIX_PATH=your/library/path:$CMAKE_PREFIX_PATH
 ```

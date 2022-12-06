@@ -23,7 +23,7 @@ module assert_result
   end type assert_result_t
 
   interface assert_result_t
-    module procedure constructor
+    procedure constructor
   end interface assert_result_t
 
 contains
@@ -82,13 +82,16 @@ contains
 
     if (self%right_operand_ /= '') then
       message = '|   |   |' // new_line('A') //                                                     &
-                ' |   |   +-> Assertion #' // string_t(self%id_) // ' failed with reason: ' //      &
-                'x (' // self%left_operand_ // ') ' // self%operator_ //                            &
-                ' y (' // self%right_operand_ // ')' // new_line('A') //                            &
+                ' |   |   +-> Assertion #' // string_t(self%id_) // ' failed with reason:' //       &
+                ' expected (' // self%left_operand_ // ') ' // self%operator_ //                    &
+                ' actual (' // self%right_operand_ // ')' // new_line('A') //                       &
                 ' |   |   +-> Check line: ' // self%file_name_ // ':' // string_t(self%line_number_)
     else
-      message = '|   |   +-> Assertion #' // string_t(self%id_) // ' failed with reason: ' //       &
-                'x is not ' // self%operator_ // '!'
+      message = '|   |   |' // new_line('A') //                                                     &
+                ' |   |   +-> Assertion #' // string_t(self%id_) // ' failed with reason:' //       &
+                ' expected (' // self%left_operand_ // ') ' // 'is ' // self%operator_ //           &
+                new_line('A') //                                                                    &
+                ' |   |   +-> Check line: ' // self%file_name_ // ':' // string_t(self%line_number_)
     end if
 
   end function failed_message

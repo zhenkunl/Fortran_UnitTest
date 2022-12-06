@@ -123,7 +123,7 @@ contains
 
     call self%assert(condition)
     id = self%case_assertions%total_num()
-    assert_result_ = assert_result_t(id, string_t(condition), string_t('true'), string_t('N/A'), condition, file_name, line_number)
+    assert_result_ = assert_result_t(id, string_t(condition), string_t('true'), string_t(''), condition, file_name, line_number)
     write(*, *) assert_result_
 
   end subroutine assert_true
@@ -140,7 +140,7 @@ contains
 
     call self%assert(.not. condition)
     id = self%case_assertions%total_num()
-    assert_result_ = assert_result_t(id, string_t(condition), string_t('false'), string_t('N/A'), .not. condition, file_name, line_number)
+    assert_result_ = assert_result_t(id, string_t(condition), string_t('false'), string_t(''), .not. condition, file_name, line_number)
     write(*, *) assert_result_
 
   end subroutine assert_false
