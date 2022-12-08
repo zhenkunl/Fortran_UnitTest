@@ -50,10 +50,11 @@ contains
 
     self%number = self%number + 1
     if (present(name)) then
-      self%name = name
+      name_ = name
     else
-      self%name = 'suite' // string_t(self%number)
+      name_ = 'suite' // string_t(self%number)
     end if
+    self%name = name_
     call self%assertions%init()
     call self%cases%init()
     call self%header()
@@ -123,7 +124,7 @@ contains
 
     call self%assert(condition)
     id = self%case_assertions%total_num()
-    assert_result_ = assert_result_t(id, string_t(condition), string_t('true'), string_t(''), condition, file_name, line_number)
+    assert_result_ = assert_result_t(id, string_t(condition), string_t('True'), string_t(''), condition, file_name, line_number)
     write(*, *) assert_result_
 
   end subroutine assert_true
@@ -140,7 +141,7 @@ contains
 
     call self%assert(.not. condition)
     id = self%case_assertions%total_num()
-    assert_result_ = assert_result_t(id, string_t(condition), string_t('false'), string_t(''), .not. condition, file_name, line_number)
+    assert_result_ = assert_result_t(id, string_t(condition), string_t('False'), string_t(''), .not. condition, file_name, line_number)
     write(*, *) assert_result_
 
   end subroutine assert_false
@@ -260,7 +261,7 @@ contains
     do i = 1, pos1
       write(*, '(a)', advance='no') '/'
     end do
-    write(*, "(' ', a, ' ')", advance='no') title%value()
+    write(*, "(' ', dt, ' ')", advance='no') title
     pos2 = pos1 + title%len() + 2
     do i = pos2, columns
       write(*, '(a)', advance='no') '/'

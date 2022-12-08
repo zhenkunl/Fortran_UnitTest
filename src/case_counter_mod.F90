@@ -26,7 +26,7 @@ contains
     type(string_t)                    :: message
 
     message = string_t(dtv%passed_num()) // ' of ' // string_t(dtv%total_num()) // ' cases succeed.'
-    write(unit, '(a)', iostat=iostat, iomsg=iomsg) message%value()
+    write(unit, '(dt)', iostat=iostat, iomsg=iomsg) message
 
   end subroutine write_message
 

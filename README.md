@@ -82,7 +82,7 @@ The output form is very like that of [fortran-unit-test](https://github.com/dong
  |   |   |
  |   |   +-> Assertion #1 succeed!
  |   |   |
- |   |   +-> Assertion #2 failed with reason: expected (True) is false
+ |   |   +-> Assertion #2 failed with reason: expected (True) is False
  |   |   +-> Check line: test_unittest.F90:10
  |   |   |
  |   |   +-> Assertion #3 succeed!
@@ -109,10 +109,10 @@ The output form is very like that of [fortran-unit-test](https://github.com/dong
  |   |
  |   +-> case case2:
  |   |   |
- |   |   +-> Assertion #1 failed with reason: expected (True) is false
+ |   |   +-> Assertion #1 failed with reason: expected (True) is False
  |   |   +-> Check line: test_unittest.F90:21
  |   |   |
- |   |   +-> Assertion #2 failed with reason: expected (False) is true
+ |   |   +-> Assertion #2 failed with reason: expected (False) is True
  |   |   +-> Check line: test_unittest.F90:22
  |   |   |
  |   +-> case2: 0 of 2 assertions succeed.

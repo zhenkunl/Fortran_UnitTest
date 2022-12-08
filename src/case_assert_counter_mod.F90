@@ -64,7 +64,7 @@ contains
     message = '|   |   |' // new_line('A') //                                             &
               ' |   +-> ' // dtv%name_ // ': ' // string_t(dtv%passed_num()) // ' of ' // &
               string_t(dtv%total_num()) // ' assertions succeed.'
-    write(unit, '(a)', iostat=iostat, iomsg=iomsg) message%value()
+    write(unit, '(dt)', iostat=iostat, iomsg=iomsg) message
 
   end subroutine write_message
 

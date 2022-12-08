@@ -112,7 +112,7 @@ contains
     else
       message = dtv%failed_message()
     end if
-    write(unit, '(a)', iostat=iostat, iomsg=iomsg) message%value()
+    write(unit, '(dt)', iostat=iostat, iomsg=iomsg) message
 
   end subroutine write_message
 
