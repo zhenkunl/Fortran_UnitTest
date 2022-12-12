@@ -67,7 +67,7 @@ To make use this library use the `unittest` module in your projects. Include a `
   call test%end_case()
   call test%summary()
 ```
-Also an complete [example program](https://github.com/zhenkunl/Fortran_UnitTest/blob/main/test/test_unittest.F90) is contained under the `test` subdirectory.
+Also a complete [example program](https://github.com/zhenkunl/Fortran_UnitTest/blob/main/test/test_unittest.F90) is contained under the `test` subdirectory.
 
 Go to [Top](#top)
 
